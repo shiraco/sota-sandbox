@@ -1,0 +1,70 @@
+VstoneMagic Build&Execute Message Log
+BuildStart time:2016/02/22 13:03:00
+ビルドの更新がありません。
+
+
+jarファイルの作成
+
+
+jarファイルの更新はありません
+
+
+送信ファイルの上書き確認ロボットのSFTPへ接続します。
+192.168.11.13@pi
+.
+
+
+ファイルの転送
+ロボットにファイルを転送します。
+Connect to 192.168.11.13@pi...接続しました。
+ファイルの転送を開始します。
+No send:'C:\workspace\vstonemagic\NewWorkSpace\bin\NewWorkSpace.jar'
+
+
+アプリケーション登録用のアーカイブファイルを作成
+.
+
+jarファイルの実行
+ロボットのSSHへ接続します。
+192.168.11.13@pi
+Linux raspberrypi 3.18.14-v7+ #792 SMP PREEMPT Sat May 23 16:19:32 BST 2015 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Feb 22 13:01:26 2016 from 192.168.11.9
+cd /home/pijava -Dfile.encoding=UTF8  -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8765 -jar NewWorkSpace.jar 2>&1 &cat /proc/6094/cmdline | grep "NewWorkSpace.jar" && kill 6094
+cd /home/pi
+ファイルの転送が完了しました。java -Dfile.encoding=UTF8  -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8765 -jar NewWorkSpace.jar 2>&1 &
+pi@raspberrypi:~$ cat /proc/6094/cmdline | grep "NewWorkSpace.jar" && kill 6094
+cat: /proc/6094/cmdline: No such file or directory
+pi@raspberrypi:~$ cd /home/pi
+pi@raspberrypi:~$ java -Dfile.encoding=UTF8  -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8765 -jar NewWorkSpace.jar 2>&1 &
+[1] 6177
+pi@raspberrypi:~$ Listening for transport dt_socket at address: 8765
+デバッグの準備ができました。
+
+jdbの実行
+デバッガを起動します。
+C:\Program Files (x86)\VstoneMagic\jdk\bin\jdb.exe -connect com.sun.jdi.SocketAttach:hostname=192.168.11.13,port=8765
+捕捉されないjava.lang.Throwableの設定遅延した捕捉されないjava.lang.Throwableの設定jdbの初期化中...デバッグ実行のスタンバイができました。
+> VMが開始されました: 現在のコール・スタックにフレームがありません[Info][SpeechRecog]SpeechRecog
+[Info][CRobotSock]Connected server
+[Info][CRobotMotion]MasterCtrlPeriod 16667
+[Info][MotionAsSotaWish]Say はじめまして
+[Error][TCPIPClient]IOException: java.io.EOFException
+[Info][TextToSpeechSota]getTTS はじめまして
+[Error][TCPIPClient]IOException: java.io.EOFException
+[Error][TextToSpeechSota][TTS_PUT_CACHE] error:44Gv44GY44KB44G+44GX44Gm/dev/shm/wavtemptts0.wav
+[Info][CPlayWave]Play /dev/shm/wavtemptts0.wav
+[Debug][CPlayWave]wavhedder 1421
+[Debug][CPlayWave]aplay 6209
+[Info][MotionAsSotaWish]play:start [talk] [1021sec]
+main[1] > アプリケーションが終了しましたexitexit
+logout
+[1]+  Done                    java -Dfile.encoding=UTF8 -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8765 -jar NewWorkSpace.jar 2>&1
+
+ロボットとの通信を切断しました。
